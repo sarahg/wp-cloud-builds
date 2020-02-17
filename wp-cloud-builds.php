@@ -1,32 +1,28 @@
 <?php
 /**
- * Plugin Name:     WP Netlify Deploy
- * Plugin URI:      https://github.com/scottopolis/
- * Description:     Trigger a deployment (or Gatsby rebuild) on Netlify when posts or pages are created or updated.
+ * Plugin Name:     WP Cloud Builds
+ * Plugin URI:      https://github.com/sarahg/wp-cloud-builds
+ * Description:     Trigger a build on a webhook-friendly CI service, like Gatsby Cloud or Netlify, when WordPress posts or pages are created or updated.
  * Version:         0.1.0
- * Author:          Scott Bolinger
- * Text Domain:     wp-netlify-deploy
- *
- * @author          Scott Bolinger
- * @copyright       Copyright (c) Scott Bolinger 2019
- *
+ * Author:          Scott Bolinger, Sarah German
+ * Text Domain:     wp-cloud-builds
  */
 
 
 // Exit if accessed directly
 if( !defined( 'ABSPATH' ) ) exit;
 
-if( !class_exists( 'WP_Netlify_Deploy' ) ) {
+if( !class_exists( 'WP_Cloud_Builds' ) ) {
 
     /**
-     * Main WP_Netlify_Deploy class
+     * Main WP_Cloud_Builds class
      *
      * @since       0.1.0
      */
-    class WP_Netlify_Deploy {
+    class WP_Cloud_Builds {
 
         /**
-         * @var         WP_Netlify_Deploy $instance The one true WP_Netlify_Deploy
+         * @var         WP_Cloud_Builds $instance The one true WP_Cloud_Builds
          * @since       0.1.0
          */
         private static $instance;
@@ -37,11 +33,11 @@ if( !class_exists( 'WP_Netlify_Deploy' ) ) {
          *
          * @access      public
          * @since       0.1.0
-         * @return      self The one true WP_Netlify_Deploy
+         * @return      self The one true WP_Cloud_Builds
          */
         public static function instance() {
             if( !self::$instance ) {
-                self::$instance = new WP_Netlify_Deploy();
+                self::$instance = new WP_Cloud_Builds();
                 self::$instance->setup_constants();
                 self::$instance->includes();
                 self::$instance->load_textdomain();
@@ -60,13 +56,13 @@ if( !class_exists( 'WP_Netlify_Deploy' ) ) {
          */
         private function setup_constants() {
             // Plugin version
-            define( 'WP_Netlify_Deploy_VER', '0.1.0' );
+            define( 'WP_Cloud_Builds_VER', '0.1.0' );
 
             // Plugin path
-            define( 'WP_Netlify_Deploy_DIR', plugin_dir_path( __FILE__ ) );
+            define( 'WP_Cloud_Builds_DIR', plugin_dir_path( __FILE__ ) );
 
             // Plugin URL
-            define( 'WP_Netlify_Deploy_URL', plugin_dir_url( __FILE__ ) );
+            define( 'WP_Cloud_Builds_URL', plugin_dir_url( __FILE__ ) );
 
         }
 
@@ -81,7 +77,7 @@ if( !class_exists( 'WP_Netlify_Deploy' ) ) {
         private function includes() {
 
             if( is_admin() )
-                require_once WP_Netlify_Deploy_DIR . 'includes/class-wp-netlify-deploy-admin.php';
+                require_once WP_Cloud_Builds_DIR . 'includes/class-wp-cloud-builds-admin.php';
             
         }
 
@@ -95,7 +91,7 @@ if( !class_exists( 'WP_Netlify_Deploy' ) ) {
          */
         public function load_textdomain() {
 
-            load_plugin_textdomain( 'wp-netlify-deploy' );
+            load_plugin_textdomain( 'wp-cloud-builds' );
             
         }
 
@@ -108,13 +104,13 @@ if( !class_exists( 'WP_Netlify_Deploy' ) ) {
  * instance to functions everywhere
  *
  * @since       0.1.0
- * @return      \WP_Netlify_Deploy The one true WP_Netlify_Deploy
+ * @return      \WP_Cloud_Builds The one true WP_Cloud_Builds
  *
  */
-function WP_Netlify_Deploy_load() {
-    return WP_Netlify_Deploy::instance();
+function WP_Cloud_Builds_load() {
+    return WP_Cloud_Builds::instance();
 }
-add_action( 'plugins_loaded', 'WP_Netlify_Deploy_load' );
+add_action( 'plugins_loaded', 'WP_Cloud_Builds_load' );
 
 
 /**
@@ -126,7 +122,7 @@ add_action( 'plugins_loaded', 'WP_Netlify_Deploy_load' );
  * @since       0.1.0
  * @return      void
  */
-function WP_Netlify_Deploy_activation() {
+function WP_Cloud_Builds_activation() {
     /* Activation functions here */
 }
-// register_activation_hook( __FILE__, 'WP_Netlify_Deploy_activation' );
+// register_activation_hook( __FILE__, 'WP_Cloud_Builds_activation' );

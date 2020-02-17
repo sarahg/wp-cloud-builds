@@ -1,6 +1,6 @@
 <?php
 /**
- * WooCommerce UPC Admin
+ * WP Cloud Builds Admin
  * @since       0.1.0
  */
 
@@ -8,17 +8,17 @@
 // Exit if accessed directly
 if( !defined( 'ABSPATH' ) ) exit;
 
-if( !class_exists( 'WP_Netlify_Deploy_Admin' ) ) {
+if( !class_exists( 'WP_Cloud_Builds' ) ) {
 
     /**
-     * WP_Netlify_Deploy_Admin class
+     * WP_Cloud_Builds class
      *
      * @since       0.2.0
      */
-    class WP_Netlify_Deploy_Admin {
+    class WP_Cloud_Builds {
 
         /**
-         * @var         WP_Netlify_Deploy_Admin $instance The one true WP_Netlify_Deploy_Admin
+         * @var         WP_Cloud_Builds $instance The one true WP_Cloud_Builds
          * @since       0.2.0
          */
         private static $instance;
@@ -31,11 +31,11 @@ if( !class_exists( 'WP_Netlify_Deploy_Admin' ) ) {
          *
          * @access      public
          * @since       0.2.0
-         * @return      object self::$instance The one true WP_Netlify_Deploy_Admin
+         * @return      object self::$instance The one true WP_Cloud_Builds
          */
         public static function instance() {
             if( !self::$instance ) {
-                self::$instance = new WP_Netlify_Deploy_Admin();
+                self::$instance = new WP_Cloud_Builds();
                 self::$instance->hooks();
             }
 
@@ -66,10 +66,10 @@ if( !class_exists( 'WP_Netlify_Deploy_Admin' ) ) {
         public function settings_page() {
 
             add_options_page(
-                'WP Netlify Deploy',
-                'WP Netlify Deploy',
+                'WP Cloud Builds',
+                'WP Cloud Builds',
                 'manage_options',
-                'wp_netlify_deploy',
+                'wp_cloud_builds',
                 array(
                     $this,
                     'render_settings'
@@ -93,16 +93,16 @@ if( !class_exists( 'WP_Netlify_Deploy_Admin' ) ) {
             ?>
             <div class="wrap">          
 
-            <h2><?php _e('Settings', 'wp-netlify-deploy'); ?></h2>
+            <h2><?php _e('Settings', 'wp-cloud-builds'); ?></h2>
 
             <?php 
-                if( get_option('wp_netlify_deploy_error') ) {
-                    echo '<p style="color:red">' . get_option('wp_netlify_deploy_error') . '</p>';
+                if( get_option('wp_cloud_builds_error') ) {
+                    echo '<p style="color:red">' . get_option('wp_cloud_builds_error') . '</p>';
             } ?>
 
             <form method="post">
 
-                <h3><?php _e('Webhook url', 'wp-netlify-deploy'); ?></h3>
+                <h3><?php _e('Webhook url', 'wp-cloud-builds'); ?></h3>
                 
                 <input id="wpnd_webhook" name="wpnd_webhook" value="<?php echo esc_html( get_option( 'wpnd_webhook' ) ); ?>" placeholder="Webhook url" type="text" size="50" /><br/>
 
@@ -116,7 +116,7 @@ if( !class_exists( 'WP_Netlify_Deploy_Admin' ) ) {
         }
 
         /**
-         * If conditions are met, trigger deployment on Netlify
+         * If conditions are met, trigger deployment
          *
          * @access      public
          * @since       0.1
@@ -133,13 +133,13 @@ if( !class_exists( 'WP_Netlify_Deploy_Admin' ) ) {
 
             if ( is_wp_error( $response ) ) {
                 $error_message = $response->get_error_message();
-                update_option('wp_netlify_deploy_error', "Something went wrong with your Netlify deployment: $error_message" );
+                update_option('wp_cloud_builds_error', "Something went wrong with your deployment: $error_message" );
             }
         }
 
     }
 
-    $WP_Netlify_Deploy_Admin = new WP_Netlify_Deploy_Admin();
-    $WP_Netlify_Deploy_Admin->instance();
+    $WP_Cloud_Builds = new WP_Cloud_Builds();
+    $WP_Cloud_Builds->instance();
 
 } // end class_exists check
