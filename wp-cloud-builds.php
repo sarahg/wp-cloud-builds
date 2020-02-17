@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     WP Cloud Builds
  * Plugin URI:      https://github.com/sarahg/wp-cloud-builds
- * Description:     Trigger a build on a webhook-friendly CI service, like Gatsby Cloud or Netlify, when WordPress posts or pages are created or updated.
+ * Description:     Trigger a build on a webhook-friendly CI/CD service, like Gatsby Cloud or Netlify, when WordPress posts or pages are created or updated.
  * Version:         0.1.0
  * Author:          Scott Bolinger, Sarah German
  * Text Domain:     wp-cloud-builds
