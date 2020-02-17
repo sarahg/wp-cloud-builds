@@ -8,18 +8,18 @@
 // Exit if accessed directly
 if( !defined( 'ABSPATH' ) ) exit;
 
-if( !class_exists( 'WP_Cloud_Builds' ) ) {
+if( !class_exists( 'WP_Cloud_Builds_Admin' ) ) {
 
     /**
-     * WP_Cloud_Builds class
+     * WP_Cloud_Builds_Admin class
      *
-     * @since       0.2.0
+     * @since       0.1.0
      */
-    class WP_Cloud_Builds {
+    class WP_Cloud_Builds_Admin {
 
         /**
-         * @var         WP_Cloud_Builds $instance The one true WP_Cloud_Builds
-         * @since       0.2.0
+         * @var         WP_Cloud_Builds_Admin $instance The one true WP_Cloud_Builds_Admin
+         * @since       0.1.0
          */
         private static $instance;
         public static $errorpath = '../php-error-log.php';
@@ -30,12 +30,12 @@ if( !class_exists( 'WP_Cloud_Builds' ) ) {
          * Get active instance
          *
          * @access      public
-         * @since       0.2.0
-         * @return      object self::$instance The one true WP_Cloud_Builds
+         * @since       0.1.0
+         * @return      object self::$instance The one true WP_Cloud_Builds_Admin
          */
         public static function instance() {
             if( !self::$instance ) {
-                self::$instance = new WP_Cloud_Builds();
+                self::$instance = new WP_Cloud_Builds_Admin();
                 self::$instance->hooks();
             }
 
@@ -47,7 +47,7 @@ if( !class_exists( 'WP_Cloud_Builds' ) ) {
          * Include necessary files
          *
          * @access      private
-         * @since       0.2.0
+         * @since       0.1.0
          * @return      void
          */
         private function hooks() {
@@ -82,7 +82,7 @@ if( !class_exists( 'WP_Cloud_Builds' ) ) {
          * Settings page output
          *
          * @access      public
-         * @since       0.1
+         * @since       0.1.0
          */
         public function render_settings() {
 
@@ -139,7 +139,7 @@ if( !class_exists( 'WP_Cloud_Builds' ) ) {
 
     }
 
-    $WP_Cloud_Builds = new WP_Cloud_Builds();
-    $WP_Cloud_Builds->instance();
+    $WP_Cloud_Builds_Admin = new WP_Cloud_Builds_Admin();
+    $WP_Cloud_Builds_Admin->instance();
 
 } // end class_exists check
