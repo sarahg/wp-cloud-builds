@@ -7,15 +7,14 @@ Full tutorial for Netlify usage located here: [https://scottbolinger.com/headles
 ## Usage
 
 * Install and activate the plugin.
-* Create a new webook on your CI service:
+* Create a new webhook on your CI/CD service (see below for provider-specific steps)
+* Add your webhook to the plugin settings and save.
 
-** Netlify
+#### Webhook setup: Netlify
 1) Navigate to Build and Deploy => Continuous deployment, build hooks.
 2) Add a deploy notification under Build and Deploy => Deploy Notifications. 
 3) Click Add notification => Outgoing Webhook, enter this url: https://YOURSITEDOMAIN.com/wp-json/wp-cloud-builds/notifications
 
-** Gatsby Cloud:
+#### Webhook setup: Gatsby Cloud
 1) Set up a new site on the Gatsby Cloud dashboard.
 2) Navigate to General => Webhook and copy the Publish webhook.
-
-* Add your build hook to the plugin settings and save.
